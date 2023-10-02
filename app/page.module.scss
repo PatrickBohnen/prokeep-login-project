@@ -4,8 +4,19 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
   min-height: 100vh;
+  position: relative;
+
+  .dinoSurprise {
+    top: 100%;
+    position: absolute;
+    visibility: hidden;
+    &:global(.yayDinos) {
+      top: calc(50% - 400px);
+      transition: top 2000ms ease;
+      visibility: visible;
+    }
+  }
 }
 
 .loginBlock {
@@ -25,6 +36,12 @@
     font-size: 1.25rem;
     font-weight: 500;
     margin: 24px 0;
+  }
+  .oopsText {
+    color: red;
+    font-size: 0.825rem;
+    font-weight: 500;
+    margin-top: 12px;
   }
   @media (min-width: 800px) {
     max-width: 560px;
@@ -79,6 +96,7 @@
       transform: none;
     }
   }
+  
   &:global(.invalidEmail) {
     grid-template-rows: 28px 42px 18px 42px 40px;
     label:first-of-type {

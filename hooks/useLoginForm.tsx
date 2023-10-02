@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const useLoginForm = () => {
   const [loginValues, setLoginValues] = useState<{email: string, password: string, isValidEmail: boolean, showEmailErrorMsg: boolean}>({email: '', password: '', isValidEmail: false, showEmailErrorMsg: false});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [isSuccessful, setIsSuccessful] = useState<undefined | boolean>()
   const checkEmailValiditityRegex = (email: string):boolean => new RegExp(/^([a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})$/).test(email);
 
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>): void  => {
+  const handleSubmit = (e: React.FormEvent): void => {
     if (e) e.preventDefault();
     setIsSubmitting(true);
     fetch("https://reqres.in/api/login", {
@@ -18,7 +19,8 @@ const useLoginForm = () => {
         })
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => setIsSuccessful(data.hasOwnProperty('token') ? true : false))
+    setIsSubmitting(false)
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -48,11 +50,18 @@ const useLoginForm = () => {
     }));
   };
 
+  const dismissDinos = (): void => {
+    setIsSuccessful(undefined)
+  }
+
   return {
     handleChange,
     handleSubmit,
     handleEmailFieldChange,
+    dismissDinos,
     loginValues,
+    isSubmitting,
+    isSuccessful
   };
 };
 
