@@ -1,0 +1,129 @@
+.main {
+  align-items: center;
+  background: rgba(132, 207, 164, 1) url("/about-us-vision.webp") no-repeat center bottom / contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  min-height: 100vh;
+}
+
+.loginBlock {
+  align-items: center;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0px 5px 18px rgba(45, 45, 45, 0.35);
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  padding: 36px 24px;
+  transform: translateY(-48px);
+  width: 90%;
+  h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-family: var(--font-barlow), Arial, sans-serif;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 24px 0;
+  }
+  @media (min-width: 800px) {
+    max-width: 560px;
+    padding: 48px 36px 36px;
+    h1 {
+      font-size: 1.625rem;
+      margin: 36px 0 30px;
+    }
+  }
+}
+
+.loginForm {
+  display: grid;
+  grid-template-rows: 18px 36px 18px 36px 60px;
+  grid-template-columns: 1fr;
+  max-width: 320px;
+  row-gap: 0.75rem;
+  width: 100%;
+
+  label {
+    grid-column: 1 / 4;
+  }
+  input {
+    border: 1px #192b3f solid;
+    border-radius: 4px;
+    grid-column: 1 / 4;
+    margin-bottom: 8px;
+    padding: 4px;
+    position: relative;
+  }
+  button {
+    background: rgb(218, 80, 57);
+    border: 1px rgb(218, 80, 57) solid;
+    border-radius: 4px;
+    color: white;
+    font-weight: 600;
+    justify-self: center;
+    letter-spacing: 1px;
+    margin-top: 12px;
+    max-width: 180px;
+    transition: all 200ms ease;
+    width: 100%;
+    &:hover{
+      background: white;
+      color: rgb(218, 80, 57);
+      transform: scale(1.02);
+    }
+    &:disabled {
+      background-color: lightgrey;
+      border: lightgrey;
+      color: grey;
+      transform: none;
+    }
+  }
+  &:global(.invalidEmail) {
+    grid-template-rows: 28px 42px 18px 42px 40px;
+    label:first-of-type {
+      position: relative;
+      &:after {
+        bottom: -0.375rem;
+        color: red;
+        content: '*Valid Email Address Required';
+        font-size: 0.75rem;
+        left: 0.25rem;
+        position: absolute;
+        overflow: visible;
+        white-space: nowrap;
+      }
+    }
+    input:first-of-type {
+      background-color: rgba(255, 0, 0, 0.2);
+    }
+  }
+  @media (min-width: 800px) {
+    grid-template-columns: 100px 18px 1fr 90px 10px;
+    grid-template-rows: 24px 24px 60px;
+    max-width: 480px;
+    row-gap: 1.25rem;
+
+    label {
+      grid-column: 1 / 2;
+      text-align: right;
+    }
+    input {
+      grid-column: 3 / 5;
+      margin-bottom: 0;
+    }
+    button {
+      font-size: 1.0625rem;
+      grid-column: 2 / 4;
+    }
+    &:global(.invalidEmail) {
+      grid-template-rows: 24px 24px 8px 48px;
+      label:first-of-type {
+        &:after {
+          bottom: -1rem;
+          left: 0.25rem;
+        }
+      }
+    }
+  }
+}
